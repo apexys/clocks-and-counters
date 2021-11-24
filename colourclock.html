@@ -1,0 +1,56 @@
+<html style="cursor: auto ! important;"><head>
+<style>
+body{
+  font-family: sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+#counter{
+  margin-top: 25vh;
+  width: 100%;
+  font-size: 1500%;
+  font-weight: bold;
+  text-align: center;
+  height: 30vh;
+  transition: color 15s;
+  color: grey;
+}
+</style>
+</head><body>
+  <div id="counter" style="color: orange;">12 : 19 : 16</div>
+  <script>
+  var lastsecond = -1;
+  function increase(){
+    var now = new Date();
+    var seconds = now.getSeconds();
+    if(seconds != lastsecond){
+    var ctr = document.getElementById('counter');
+    var minutes = now.getMinutes();
+    var hours = now.getHours();
+    lastsecond = seconds;
+    seconds = (seconds + '').length < 2 ? '0' + seconds : seconds + '';
+    minutes = (minutes + '').length < 2 ? '0' + minutes : minutes + '';
+    hours = (seconds + '').length < 2 ? '0' + hours : hours + '';
+    
+    ctr.innerText = hours + ' : ' + minutes + ' : ' + seconds;
+    if(lastsecond < 0){
+      ctr.style.color = 'grey';
+    }
+    if(lastsecond > 0 && lastsecond < 15){
+      ctr.style.color = 'red';
+    }
+    if(lastsecond > 15 && lastsecond < 30){
+      ctr.style.color = 'orange';
+    }
+    if(lastsecond > 30 && lastsecond < 45){
+      ctr.style.color = 'green';
+    }
+    if(lastsecond > 45 && lastsecond < 60){
+      ctr.style.color = 'blue'
+    }}
+    requestAnimationFrame(increase); 
+  }
+  requestAnimationFrame(increase);
+  </script>
+</body></html>
